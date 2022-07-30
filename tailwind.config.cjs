@@ -26,8 +26,8 @@ module.exports = {
       },
 
       fontFamily: {
-        Baloo2: ['Baloo 2', 'cursive'],
-        Roboto: ['Roboto', 'sans-serif'],
+        baloo: ["'Baloo 2'", 'cursive'],
+        roboto: ['Roboto', 'sans-serif'],
       },
     },
   },
