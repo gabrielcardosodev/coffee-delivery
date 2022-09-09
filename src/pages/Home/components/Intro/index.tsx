@@ -1,6 +1,6 @@
 import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
 
-import coffeeCupImg from '../../../assets/coffee_cup.png'
+import coffeeCupImg from '../../../../assets/coffee_cup.png'
 
 export function Intro() {
   return (
