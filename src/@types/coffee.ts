@@ -13,7 +13,16 @@ import Latte from '../assets/latte.png'
 import Macchiato from '../assets/macchiato.png'
 import Mocaccino from '../assets/mochaccino.png'
 
-export const coffees = [
+export type Coffee = {
+  name: string
+  description: string
+  price: number
+  image: string
+  id: string
+  categories: string[]
+}
+
+export const coffees: Coffee[] = [
   {
     name: 'Expresso Tradicional',
     description: 'O tradicional café feito com água quente e grãos moídos',
@@ -37,7 +46,7 @@ export const coffees = [
     description: 'Café expresso tradicional com espuma cremosa',
     price: 9.9,
     image: ExpressoCremoso,
-    id: 'express-american',
+    id: 'american-express',
     categories: ['tradicional'],
   },
 
@@ -144,5 +153,3 @@ export const coffees = [
     categories: ['especial'],
   },
 ]
-
-export type Coffee = typeof coffees[0]
