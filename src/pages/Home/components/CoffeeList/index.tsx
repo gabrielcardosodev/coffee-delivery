@@ -1,4 +1,4 @@
-import { Coffee, coffees } from '../../../../@types/coffee'
+import { coffees } from '../../../../@types/coffee'
 import { CoffeeCard } from '../../../../components/CoffeeCard'
 
 export function CoffeeList() {
@@ -9,7 +9,7 @@ export function CoffeeList() {
       </strong>
 
       <div className="my-14 flex flex-wrap gap-8">
-        {coffees.map((coffee: Coffee) => (
+        {coffees.map((coffee) => (
           <CoffeeCard key={coffee.id} coffee={coffee} />
         ))}
       </div>
