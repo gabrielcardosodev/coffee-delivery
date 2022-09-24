@@ -1,21 +1,36 @@
-import { Minus, Plus, ShoppingCartSimple } from 'phosphor-react'
-import { useState } from 'react'
+import { ShoppingCartSimple } from 'phosphor-react'
+import { ChangeEvent, useContext, useState } from 'react'
 
 import { Coffee } from '../../@types/coffee'
+import { CoffeeContext } from '../../contexts/CoffeeContext'
+import { currencyFormatted } from '../../utils/currencyFormatted'
+import { QuantityInput } from '../QuantityInput'
 
 interface CoffeeProps {
   coffee: Coffee
 }
 
 export function CoffeeCard({ coffee }: CoffeeProps) {
-  const [itemAmount, setItemAmount] = useState(0)
+  const [quantity, setQuantity] = useState(0)
+  const { addCoffeeToCart } = useContext(CoffeeContext)
 
-  function handleIncreaseItemAmountByOne() {
-    setItemAmount((state) => state + 1)
+  function handleAddCoffeeToCart(event: ChangeEvent<HTMLFormElement>) {
+    event?.preventDefault()
+
+    const coffeeToAdd = {
+      ...coffee,
+      quantity,
+    }
+
+    addCoffeeToCart(coffeeToAdd)
   }
 
-  function handleDecreaseItemAmountByOne() {
-    setItemAmount((state) => {
+  function handleIncreaseQuantityByOne() {
+    setQuantity((state) => state + 1)
+  }
+
+  function handleDecreaseQuantityByOne() {
+    setQuantity((state) => {
       const newState = state - 1
 
       return newState >= 0 ? newState : 0
@@ -44,34 +59,21 @@ export function CoffeeCard({ coffee }: CoffeeProps) {
         {coffee.description}
       </p>
 
-      <form className="mt-9 flex w-full items-center justify-between">
-        <p className="text-2xl font-bold text-base-text">
+      <form
+        onSubmit={handleAddCoffeeToCart}
+        className="mt-9 flex w-full items-center justify-between"
+      >
+        <p className="font-baloo text-2xl font-bold text-base-text">
           <span className="text-sm font-normal leading-none">R$ </span>
-          {coffee.price}
+          {currencyFormatted(coffee.price)}
         </p>
 
         <div className="flex items-center gap-2">
-          <div className="flex h-fit w-[72px] rounded-md bg-base-button p-2">
-            <button
-              type="button"
-              className="text-purple-primary hover:text-purple-dark"
-              onClick={handleDecreaseItemAmountByOne}
-            >
-              <Minus weight="bold" size={14} />
-            </button>
-
-            <span className="w-full border-none bg-transparent text-center text-base-title outline-none">
-              {itemAmount ?? 0}
-            </span>
-
-            <button
-              type="button"
-              className="text-purple-primary hover:text-purple-dark"
-              onClick={handleIncreaseItemAmountByOne}
-            >
-              <Plus weight="bold" size={14} />
-            </button>
-          </div>
+          <QuantityInput
+            handleIncreaseQuantityByOne={handleIncreaseQuantityByOne}
+            handleDecreaseQuantityByOne={handleDecreaseQuantityByOne}
+            quantity={quantity}
+          />
 
           <button
             type="submit"
