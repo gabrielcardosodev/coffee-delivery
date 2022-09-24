@@ -3,7 +3,7 @@ import { CoffeeCard } from '../../../../components/CoffeeCard'
 
 export function CoffeeList() {
   return (
-    <section className="mt-8">
+    <div className="mt-14">
       <strong className="font-baloo text-[32px] text-base-subtitle">
         Nossos cafés
       </strong>
@@ -13,6 +13,6 @@ export function CoffeeList() {
           <CoffeeCard key={coffee.id} coffee={coffee} />
         ))}
       </div>
-    </section>
+    </div>
   )
 }
