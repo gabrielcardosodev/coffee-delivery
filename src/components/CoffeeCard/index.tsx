@@ -1,40 +1,40 @@
-import { ShoppingCartSimple } from 'phosphor-react'
-import { ChangeEvent, useContext, useState } from 'react'
+import { ShoppingCartSimple } from "phosphor-react";
+import { ChangeEvent, useContext, useState } from "react";
 
-import { Coffee } from '../../@types/coffee'
-import { CoffeeContext } from '../../contexts/CoffeeContext'
-import { currencyFormatted } from '../../utils/currencyFormatted'
-import { QuantityInput } from '../QuantityInput'
+import { Coffee } from "../../@types/coffee";
+import { CoffeeContext } from "../../contexts/CoffeeContext";
+import { currencyFormatted } from "../../utils/currencyFormatted";
+import { QuantityInput } from "../QuantityInput";
 
 interface CoffeeProps {
-  coffee: Coffee
+  coffee: Coffee;
 }
 
 export function CoffeeCard({ coffee }: CoffeeProps) {
-  const [quantity, setQuantity] = useState(0)
-  const { addCoffeeToCart } = useContext(CoffeeContext)
+  const { addCoffeeToCart } = useContext(CoffeeContext);
+  const [quantity, setQuantity] = useState(1);
 
   function handleAddCoffeeToCart(event: ChangeEvent<HTMLFormElement>) {
-    event?.preventDefault()
+    event?.preventDefault();
 
     const coffeeToAdd = {
       ...coffee,
       quantity,
-    }
+    };
 
-    addCoffeeToCart(coffeeToAdd)
+    addCoffeeToCart(coffeeToAdd);
   }
 
   function handleIncreaseQuantityByOne() {
-    setQuantity((state) => state + 1)
+    setQuantity((state) => state + 1);
   }
 
   function handleDecreaseQuantityByOne() {
     setQuantity((state) => {
-      const newState = state - 1
+      const newState = state - 1;
 
-      return newState >= 0 ? newState : 0
-    })
+      return newState >= 0 ? newState : 0;
+    });
   }
 
   return (
@@ -70,8 +70,9 @@ export function CoffeeCard({ coffee }: CoffeeProps) {
 
         <div className="flex items-center gap-2">
           <QuantityInput
-            handleIncreaseQuantityByOne={handleIncreaseQuantityByOne}
-            handleDecreaseQuantityByOne={handleDecreaseQuantityByOne}
+            size="large"
+            onIncrease={handleIncreaseQuantityByOne}
+            onDecrease={handleDecreaseQuantityByOne}
             quantity={quantity}
           />
 
@@ -84,5 +85,5 @@ export function CoffeeCard({ coffee }: CoffeeProps) {
         </div>
       </form>
     </div>
-  )
+  );
 }
