@@ -10,7 +10,7 @@ import { CartItems } from '../CartItems'
 
 export function CartForm() {
   return (
-    <form className="mt-10 flex gap-8" action="">
+    <form action="">
       <div className="flex w-full max-w-[640px] flex-col">
         <strong className="font-baloo text-lg text-base-subtitle">
           Complete seu pedido
@@ -108,8 +108,6 @@ export function CartForm() {
           </div>
         </div>
       </div>
-
-      <CartItems />
     </form>
   )
 }
